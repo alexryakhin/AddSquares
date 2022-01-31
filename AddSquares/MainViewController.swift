@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Private properties
     private var selectedColor: UIColor?
+    private var colorCount: [UIColor:Int] = [:]
 
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -40,10 +41,17 @@ class MainViewController: UIViewController {
     
     private func addSquare(with color: UIColor?, at location: CGPoint) {
         guard let color = color else { return }
-        let squareView = UIView(frame: CGRect(x: location.x, y: location.y, width: 50, height: 50))
+        let squareView = UILabel(frame: CGRect(x: location.x, y: location.y, width: 50, height: 50))
         squareView.backgroundColor = color
+        squareView.textAlignment = .center
+        squareView.textColor = .white
+        if let existingColorCount = colorCount[color] {
+            colorCount[color] = existingColorCount + 1
+            squareView.text = String(existingColorCount + 1)
+        } else {
+            squareView.text = "1"
+            colorCount[color] = 1
+        }
         view.addSubview(squareView)
     }
-
 }
-
