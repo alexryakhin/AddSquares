@@ -12,11 +12,12 @@ class MainViewController: UIViewController {
     @IBOutlet private var colorButtons: [UIButton]!
     
     // MARK: - Private properties
-    private var selectedColor: UIColor = .black
+    private var selectedColor: UIColor?
 
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
     }
 
     // MARK: IBActions
@@ -30,6 +31,18 @@ class MainViewController: UIViewController {
     private func updateSelectedButton(_ button: UIButton) {
         colorButtons.forEach { $0.alpha = 1.0 }
         button.alpha = 0.8
+    }
+    
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        // sender has location CGPoint, so we can easily track user's taps
+        addSquare(with: selectedColor, at: sender.location(in: view))
+    }
+    
+    private func addSquare(with color: UIColor?, at location: CGPoint) {
+        guard let color = color else { return }
+        let squareView = UIView(frame: CGRect(x: location.x, y: location.y, width: 50, height: 50))
+        squareView.backgroundColor = color
+        view.addSubview(squareView)
     }
 
 }
