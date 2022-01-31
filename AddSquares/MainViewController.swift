@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet private var colorButtons: [UIButton]!
     @IBOutlet weak var undoButton: UIBarButtonItem!
     @IBOutlet weak var redoButton: UIBarButtonItem!
+    @IBOutlet weak var removeAllButton: UIBarButtonItem!
     
     // MARK: - Private properties
     private var selectedColor: UIColor?
@@ -58,6 +59,18 @@ class MainViewController: UIViewController {
         updateButtonsState()
     }
     
+    @IBAction func removeAllPressed(_ sender: Any) {
+        view.subviews.forEach { view in
+            if view is UILabel {
+                view.removeFromSuperview()
+                labels.removeAll()
+                removedLabels.removeAll()
+                colorCount.removeAll()
+            }
+        }
+        updateButtonsState()
+    }
+    
     // MARK: - Private methods
     private func updateSelectedButton(_ button: UIButton) {
         colorButtons.forEach { $0.alpha = 1.0 }
@@ -90,5 +103,6 @@ class MainViewController: UIViewController {
     private func updateButtonsState() {
         undoButton.isEnabled = !labels.isEmpty
         redoButton.isEnabled = !removedLabels.isEmpty
+        removeAllButton.isEnabled = !labels.isEmpty || !removedLabels.isEmpty
     }
 }

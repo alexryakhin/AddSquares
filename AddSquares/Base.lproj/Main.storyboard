@@ -67,6 +67,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NLt-ff-xAU">
+                        <barButtonItem key="leftBarButtonItem" title="Remove All" id="HZW-fC-e0f">
+                            <connections>
+                                <action selector="removeAllPressed:" destination="BYZ-38-t0r" id="bnJ-o6-dWB"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Undo" id="fIx-a7-eIX">
                                 <connections>
@@ -82,6 +87,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="redoButton" destination="Hff-U2-kbt" id="uVa-qg-m71"/>
+                        <outlet property="removeAllButton" destination="HZW-fC-e0f" id="SjM-kk-gaI"/>
                         <outlet property="undoButton" destination="fIx-a7-eIX" id="YvX-bR-SiO"/>
                         <outletCollection property="colorButtons" destination="33p-3o-kS6" collectionClass="NSMutableArray" id="crq-kA-UTb"/>
                         <outletCollection property="colorButtons" destination="hy8-K3-13n" collectionClass="NSMutableArray" id="1it-kl-7hA"/>
