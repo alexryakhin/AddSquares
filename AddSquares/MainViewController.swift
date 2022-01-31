@@ -10,6 +10,8 @@ import UIKit
 class MainViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private var colorButtons: [UIButton]!
+    @IBOutlet weak var undoButton: UIBarButtonItem!
+    @IBOutlet weak var redoButton: UIBarButtonItem!
     
     // MARK: - Private properties
     private var selectedColor: UIColor?
@@ -18,6 +20,7 @@ class MainViewController: UIViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Color Game"
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
     }
 
@@ -26,6 +29,14 @@ class MainViewController: UIViewController {
         guard let color = sender.backgroundColor else { return }
         selectedColor = color
         updateSelectedButton(sender)
+    }
+    
+    @IBAction func undo(_ sender: Any) {
+        
+    }
+    
+    @IBAction func redo(_ sender: Any) {
+        
     }
     
     // MARK: - Private methods

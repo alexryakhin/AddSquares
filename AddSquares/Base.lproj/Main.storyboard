@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yk8-OH-3PH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -66,7 +66,23 @@
                             <constraint firstItem="dUt-IV-503" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Os0-Mf-LhT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="NLt-ff-xAU">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Undo" id="fIx-a7-eIX">
+                                <connections>
+                                    <action selector="undo:" destination="BYZ-38-t0r" id="iyp-w4-zWH"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Redo" id="Hff-U2-kbt">
+                                <connections>
+                                    <action selector="redo:" destination="BYZ-38-t0r" id="Igd-Qk-UrE"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="redoButton" destination="Hff-U2-kbt" id="uVa-qg-m71"/>
+                        <outlet property="undoButton" destination="fIx-a7-eIX" id="YvX-bR-SiO"/>
                         <outletCollection property="colorButtons" destination="33p-3o-kS6" collectionClass="NSMutableArray" id="crq-kA-UTb"/>
                         <outletCollection property="colorButtons" destination="hy8-K3-13n" collectionClass="NSMutableArray" id="1it-kl-7hA"/>
                         <outletCollection property="colorButtons" destination="Yof-2T-LVO" collectionClass="NSMutableArray" id="6Q1-yy-iMG"/>
@@ -74,6 +90,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="928.98550724637687" y="69.642857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ket-ew-obH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yk8-OH-3PH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rOM-yP-3Np">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="89w-Yt-oBL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WOQ-v7-EUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="69.642857142857139"/>
         </scene>
