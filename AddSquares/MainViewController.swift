@@ -16,11 +16,14 @@ class MainViewController: UIViewController {
     // MARK: - Private properties
     private var selectedColor: UIColor?
     private var colorCount: [UIColor:Int] = [:]
+    private var labels: [UILabel] = []
+    private var removedLabels: [UILabel] = []
 
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Color Game"
+        updateButtonsState()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
     }
 
@@ -32,11 +35,27 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func undo(_ sender: Any) {
-        
+        let lastSquare = labels.removeLast()
+        lastSquare.removeFromSuperview()
+        guard let color = lastSquare.backgroundColor else { return }
+        lastSquare.text = ""
+        if let existingColorCount = colorCount[color] {
+            colorCount[color] = existingColorCount - 1
+        }
+        removedLabels.append(lastSquare)
+        updateButtonsState()
     }
     
     @IBAction func redo(_ sender: Any) {
-        
+        let lastSquare = removedLabels.removeLast()
+        guard let color = lastSquare.backgroundColor else { return }
+        if let existingColorCount = colorCount[color] {
+            colorCount[color] = existingColorCount + 1
+            lastSquare.text = String(existingColorCount + 1)
+        }
+        view.addSubview(lastSquare)
+        labels.append(lastSquare)
+        updateButtonsState()
     }
     
     // MARK: - Private methods
@@ -64,5 +83,12 @@ class MainViewController: UIViewController {
             colorCount[color] = 1
         }
         view.addSubview(squareView)
+        labels.append(squareView)
+        updateButtonsState()
+    }
+    
+    private func updateButtonsState() {
+        undoButton.isEnabled = !labels.isEmpty
+        redoButton.isEnabled = !removedLabels.isEmpty
     }
 }
